@@ -24,8 +24,8 @@ fun Canvas.drawSTLNode(i : Int, scale : Float, paint : Paint) {
     paint.strokeWidth = Math.min(w, h) / 60
     paint.strokeCap = Paint.Cap.ROUND
     val index : Int = i % 2
-    val y : Float = -gap * (1 - scale)
     val factor : Int = 1 - 2 * index
+    val y : Float = -gap * (1 - scale) * factor
     save()
     translate(i * gap, h/2)
     val path : Path = Path()
@@ -180,7 +180,7 @@ class SquareToLineView(ctx : Context) : View(ctx) {
         private var animator : Animator = Animator(view)
 
         fun render(canvas : Canvas, paint : Paint) {
-            canvas.drawColor(Color.parseColor("#212121"))
+            canvas.drawColor(Color.parseColor("#BDBDBD"))
             lstl.draw(canvas, paint)
             animator.animate {
                 lstl.update {i, fl ->
