@@ -4,6 +4,7 @@ package com.anwesh.uiprojects.squaretolineview
  * Created by anweshmishra on 09/08/18.
  */
 
+import android.app.Activity
 import android.view.View
 import android.view.MotionEvent
 import android.content.Context
@@ -192,6 +193,14 @@ class SquareToLineView(ctx : Context) : View(ctx) {
             lstl.startUpdating {
                 animator.start()
             }
+        }
+    }
+
+    companion object {
+        fun create(activity : Activity) : SquareToLineView {
+            val view : SquareToLineView = SquareToLineView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
