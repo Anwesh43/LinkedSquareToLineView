@@ -169,4 +169,27 @@ class SquareToLineView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : SquareToLineView) {
+
+        private var lstl : LinkedSTL = LinkedSTL(0)
+
+        private var animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#212121"))
+            lstl.draw(canvas, paint)
+            animator.animate {
+                lstl.update {i, fl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            lstl.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
