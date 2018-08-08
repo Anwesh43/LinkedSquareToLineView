@@ -9,8 +9,32 @@ import android.view.MotionEvent
 import android.content.Context
 import android.graphics.Paint
 import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Path
 
 val nodes : Int = 5
+
+fun Canvas.drawSTLNode(i : Int, scale : Float, paint : Paint) {
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    val gap : Float = w / nodes
+    paint.style = Paint.Style.STROKE
+    paint.color = Color.parseColor("#4CAF50")
+    paint.strokeWidth = Math.min(w, h) / 60
+    paint.strokeCap = Paint.Cap.ROUND
+    val index : Int = i % 2
+    val y : Float = -gap * (1 - scale)
+    val factor : Int = 1 - 2 * index
+    save()
+    translate(i * gap, h/2)
+    val path : Path = Path()
+    path.moveTo(0f, 0f)
+    path.lineTo(0f, y)
+    path.lineTo(gap, y)
+    path.lineTo(gap, 0f)
+    drawPath(path, paint)
+    restore()
+}
 
 class SquareToLineView(ctx : Context) : View(ctx) {
 
